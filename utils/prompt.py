@@ -2,7 +2,7 @@ import inspect
 
 from utils.mediatypes import Book, Movie, Cd
 
-""" Prompt module concerned with input/utput in terminal """
+""" Concerned with input/utput in terminal """
 
 USER_CHOICE = """
 Type:
@@ -29,9 +29,12 @@ SORT_CHOICE = """List media sorted by...
 
 
 def add_item(libary):
-    cls_wanted = media_type()
-    args = [input(f'{arg.replace("_", " ").capitalize()}: ') for arg in media_args(cls_wanted)]
-    return libary.add_item(cls_wanted, args)
+    try:
+        cls_wanted = media_type()
+        args = [input(f'{arg.replace("_", " ").capitalize()}: ') for arg in media_args(cls_wanted)]
+        return libary.add_item(cls_wanted, args)
+    except ValueError:
+        print('Check input and try again!')
 
 
 def media_type():

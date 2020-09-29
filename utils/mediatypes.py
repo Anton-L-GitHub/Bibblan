@@ -1,6 +1,6 @@
 from datetime import datetime
 
-""" Mediatype module concerned with """
+""" Provides different Media-object-types  """
 
 
 class Media:
@@ -9,9 +9,9 @@ class Media:
     def __init__(self, title, creator, length, purchase_price, purchase_year):
         self.title = title
         self.creator = creator
-        self.length = length
-        self.purchase_price = purchase_price
-        self.purchase_year = purchase_year
+        self.length = float(length)
+        self.purchase_price = float(purchase_price)
+        self.purchase_year = float(purchase_year)
 
     @property
     def age(self):
@@ -22,8 +22,9 @@ class Media:
         return None
 
     def __str__(self):
-        return f'{"-" * 20}\n{self.__class__.__name__} - {self.title} - Author: {self.creator} - Minutes: {self.length} -' \
-               f'Bought: {self.purchase_year} - Year of purchase: {self.purchase_price} - Price Now {self.value}'
+        return f'{"-" * 20}\n{self.__class__.__name__} - {self.title} - Author: {self.creator} - ' \
+               f'Minutes: {self.length:.0f} - Year of purchase: {self.purchase_year:.0f} - ' \
+               f'Purchase price: {self.purchase_price:.0f}kr - Price Now {self.value:.0f}kr'
 
 
 class Book(Media):
@@ -33,11 +34,11 @@ class Book(Media):
     @property
     def value(self):
         if int(self.age) >= 50:
-            price_today = float(self.purchase_price) * 0.9 ** 50
-            price_today = price_today * 1.08 ** (float(self.age) - 50)
+            price_today = self.purchase_price * 0.9 ** 50
+            price_today = price_today * 1.08 ** (self.age - 50)
             return round(price_today)
         else:
-            price_today = float(self.purchase_price) * 0.9 ** float(self.age)
+            price_today = self.purchase_price * 0.9 ** self.age
             return round(price_today)
 
 
@@ -48,7 +49,7 @@ class Movie(Media):
 
     @property
     def value(self):
-        price_today = float(self.purchase_price) * 0.9 ** float(self.age)
+        price_today = float(self.purchase_price) * 0.9 ** self.age
         price_today = price_today * float(f'0.{self.how_damaged}')
         return round(price_today)
 
