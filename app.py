@@ -1,5 +1,5 @@
 from utils.lib import Libary
-from utils.prompt import USER_CHOICE, add_item
+from utils.prompt import USER_CHOICE, add_item, print_items
 
 
 def main():
@@ -9,7 +9,7 @@ def main():
         if user_input == '1':
             add_item(libary)
         elif user_input == '2':
-            libary.print_items()
+            print_items(libary)
         elif user_input == '3':
             libary.save_to_disk()
         elif user_input == '4':

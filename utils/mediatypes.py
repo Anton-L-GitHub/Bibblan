@@ -1,5 +1,5 @@
 from datetime import datetime
-import inspect
+
 """ Mediatype module concerned with """
 
 

@@ -16,9 +16,14 @@ class Libary:
         new_obj = obj_cls(*args)
         self.lib_list.append(new_obj)
 
-    def print_items(self):
-        for item in self.lib_list:
-            print(item)
+    def get_items(self, sort_by):
+        items = self.lib_list
+        if sort_by == '1':  # Sort by added
+            return items
+        elif sort_by == '2':  # Sort by title
+            return sorted(items, key=lambda x: x.title)
+        elif sort_by == '3':  # Sort by value
+            return sorted(items, key=lambda x: x.value)
 
     def _init_from_disk(self):
         items = disk_get()
@@ -33,25 +38,14 @@ class Libary:
                 keys = [item[key] for key in item.keys()][1:]
                 self.add_item(Cd, keys)
 
-    # def save_to_disk(self):
-    #     all_obj = []
-    #     for obj in self.lib_list:
-    #         all_obj.append(
-    #             {'type': obj.__class__.__name__, 'title': obj.title, 'creator': obj.creator, 'length': obj.length,
-    #              'purchase_price': obj.purchase_price, 'purchase_year': obj.purchase_year})
-    #     disk_save(all_obj)
-
     def save_to_disk(self):
         all_obj = []
         for obj in self.lib_list:
             obj_dict = {}
-            obj_cls = obj.__class__.__name__
             args = media_args(obj.__class__)
             values = [i for i in obj.__dict__.values()]
-            obj_dict['type'] = obj_cls
-            for arg, value in zip(args, values):
-                arg = str(arg)
-                value = str(value)
-                obj_dict[arg] = value
+            obj_dict['type'] = obj.__class__.__name__  # Add object class -> obj_dict
+            for arg, value in zip(args, values):  # Add objects other key value pairs -> obj_dict
+                obj_dict[str(arg)] = str(value)
             all_obj.append(obj_dict)
         disk_save(all_obj)
