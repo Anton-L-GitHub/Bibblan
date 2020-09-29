@@ -1,4 +1,4 @@
-import inspect  # python 3.3
+import inspect
 
 from utils.mediatypes import Book, Movie, Cd
 
@@ -30,7 +30,7 @@ SORT_CHOICE = """List media sorted by...
 
 def add_item(libary):  # Borde vara en funktion i prompt
     cls_wanted = media_type()
-    args = [input(f'{arg}:') for arg in media_args(cls_wanted)]
+    args = [input(f'{arg.replace("_", " ").capitalize()}: ') for arg in media_args(cls_wanted)]
     return libary.add_item(cls_wanted, args)
 
 
