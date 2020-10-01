@@ -51,6 +51,7 @@ def media_type():
 
 
 def print_items(libary):
+    """ Input-prompt with sorting methods, returns a sorted list with user-selected sorting """
     sort_choice = input(SORT_CHOICE)
     while sort_choice != '0':
         try:
@@ -67,4 +68,5 @@ def _print_items(list_of_dict):
 
 
 def media_args(cls):
+    """Returns the required parameters to construct given class"""
     return inspect.getfullargspec(cls.__init__)[0][1:]
