@@ -12,10 +12,6 @@ def main():
             add_item(libary)
         elif user_input == '2':
             print_items(libary)
-        elif user_input == '3':
-            libary.save_to_disc()
-        elif user_input == '4':
-            pass
         user_input = input(USER_CHOICE)
     libary.save_to_disc()
 
